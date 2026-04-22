@@ -1,62 +1,58 @@
-# 🏋️‍♂️ Push-Up Tracker 100
+# Push-Up Tracker
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.0-lightgrey?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![MediaPipe](https://img.shields.io/badge/MediaPipe-Pose-green?logo=google&logoColor=white)](https://mediapipe.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+A Windows-based computer vision application designed for real-time push-up tracking and daily goal management. This project utilizes MediaPipe for pose estimation and a Flask-based MJPEG streaming architecture to provide a native-feeling desktop experience.
 
-A high-performance Windows desktop application that uses **AI-powered pose detection** to track your push-ups in real-time. Designed to help you smash the **100-rep daily goal** with a premium, glassmorphism-styled interface.
+[![GitHub license](https://img.shields.io/github/license/idkwtp-1/push-up-tracker)](https://github.com/idkwtp-1/push-up-tracker/blob/main/LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
 
----
+## Overview
 
-## ✨ Key Features
+Push-Up Tracker is an automated workout assistant that ensures exercise form integrity and session persistence. It converts physical effort into "Freedom Minutes," providing a gamified yet rigorous approach to reaching a 100-rep daily milestone.
 
-*   🤖 **AI Pose Detection:** Powered by MediaPipe for high-accuracy tracking.
-*   🕒 **Time-Freedom Conversion:** 1 push-up = 1 minute of "freedom" (tracked via the UI).
-*   🔒 **Goal Lock:** The interface remains focused until you reach your daily 100 reps.
-*   📈 **Workout History:** Visualized progress using Chart.js to track your fastest times.
-*   🎙️ **Voice Commands:** Offline speech recognition (Vosk) to control the session hands-free.
-*   🐱 **Early-Exit Penalty:** Quitting early (1-99 reps) triggers a sequence of "distraction" cat videos!
+## Technical Architecture
 
-## 🚀 Tech Stack
+*   **Vision Engine:** MediaPipe Pose Landmarker (Heavy Model) for primary detection, with a Haar Cascade + Contour detection fallback for lower-spec hardware.
+*   **Backend:** Python/Flask serving as a REST API and MJPEG video provider.
+*   **UI/UX:** A glassmorphism-inspired web interface rendered via `pywebview` for a standalone desktop application feel.
+*   **Speech Integration:** Offline voice recognition using the Vosk engine for hands-free session control.
+*   **Data Persistence:** Local JSON-based storage for workout history and performance metrics (Fastest 100).
 
-| Layer | Technology |
-| :--- | :--- |
-| **Backend** | Flask (Python) |
-| **Vision** | MediaPipe Pose & OpenCV |
-| **Frontend** | HTML5, CSS3 (Vanilla), JavaScript |
-| **Windowing** | PyWebview (Native Window) |
-| **Speech** | Vosk (Offline recognition) |
-| **Data** | JSON Persistence |
+## Installation
 
-## 🛠️ Installation & Setup
+### Prerequisites
+*   Windows OS (Required for `winsound` and `winreg` integrations)
+*   Python 3.8 or higher
+*   Webcam
 
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/idkwtp-1/push-up-tracker.git
-    cd push-up-tracker
-    ```
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/idkwtp-1/push-up-tracker.git
+   ```
+2. Install dependencies:
+   ```bash
+   ./install.bat
+   ```
+3. Configure models:
+   *   The MediaPipe model (`pose_landmarker.task`) downloads automatically on initialization.
+   *   Download and extract the `vosk-model-small-en-us-0.15` directory into the project root.
 
-2.  **Install Dependencies:**
-    Run the provided batch file:
-    ```bash
-    install.bat
-    ```
+## Usage
 
-3.  **Download Models:**
-    *   Place the `vosk-model-small-en-us-0.15` directory in the root.
-    *   The MediaPipe `pose_landmarker.task` will auto-download on first run.
+Launch the application using the provided batch file:
+```bash
+./start_pushup_tracker.bat
+```
 
-4.  **Add Media:**
-    *   Place 3 `.mp4` files in `src/cat_vids/` (see tracker.py for specific filenames).
+### Key Controls
+*   **Calibration:** The system automatically calibrates your "plank" position upon session start.
+*   **Voice:** Say "Stop" after reaching the 100-rep goal to safely terminate the session.
+*   **Early Exit:** Quitting before the 100-rep goal will trigger a sequence of mock playback videos.
 
-## 🏃‍♂️ Usage
-
-Simply double-click `start_pushup_tracker.bat` to launch the app.
-*   The camera will initialize automatically.
-*   Maintain a "plank" position to start detection.
-*   Reach 100 reps to unlock the full history and completion stats!
+## Roadmap
+- [ ] Integration with external fitness APIs.
+- [ ] Multi-exercise support (Squats, Pull-ups).
+- [ ] Advanced form correction feedback using joint angle analysis.
 
 ---
-
-*Made with ❤️ for a healthier lifestyle.*
+*Developed for personal performance tracking and computer vision research.*
