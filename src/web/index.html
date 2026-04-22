@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Push-Up Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>PUSH-UP TRACKER</h1>
+            <div id="stats">
+                <span id="rep-count">0</span>/100
+                <span id="timer">00:00</span>
+            </div>
+        </header>
+        <main>
+            <div class="camera-container">
+                <img id="video-feed" src="/video_feed">
+                <div id="status-overlay">READY</div>
+            </div>
+            <button id="start-btn">START SESSION</button>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
